@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Adoption System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Pet Adoption System</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="{{ url_for('add_pet') }}">Add Pet</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Available Pets</h2>
+        <div class="pet-list">
+            {% for pet in pets %}
+                <div class="pet">
+                    <h3>{{ pet.name }}</h3>
+                    <p><strong>Age:</strong> {{ pet.age }}</p>
+                    <p><strong>Breed:</strong> {{ pet.breed }}</p>
+                    <p>{{ pet.description }}</p>
+                    <form action="{{ url_for('adopt_pet', id=pet.id) }}" method="POST">
+                        <button type="submit">Adopt</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>
